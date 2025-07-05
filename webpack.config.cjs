@@ -36,10 +36,9 @@ module.exports = {
       },
 
       shared: {
-        react: { singleton: true, eager: true, requiredVersion: "^19.1.0" },
+        react: { singleton: true, requiredVersion: "^19.1.0" },
         "react-dom": {
           singleton: true,
-          eager: true,
           requiredVersion: "^19.1.0",
         },
       },
