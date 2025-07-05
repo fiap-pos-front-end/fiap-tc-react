@@ -34,6 +34,9 @@ module.exports = {
       exposes: {
         "./mount": "./src/bootstrap.tsx",
       },
+      remotes: {
+        mfeShell: "http://localhost:4200/remoteEntry.js",
+      },
 
       shared: {
         react: { singleton: true, eager: true, requiredVersion: "^19.1.0" },
