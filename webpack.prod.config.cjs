@@ -4,7 +4,7 @@ const { ModuleFederationPlugin } = require("webpack").container;
 
 module.exports = {
   entry: "./src/bootstrap.tsx",
-  mode: "development",
+  mode: "production",
   target: "web",
 
   experiments: {
@@ -35,7 +35,7 @@ module.exports = {
         "./mount": "./src/bootstrap.tsx",
       },
       remotes: {
-        mfeShell: "http://localhost:4200/remoteEntry.js",
+        mfeShell: "http://localhost/fiap-tc-shell/remoteEntry.js",
       },
 
       shared: {
