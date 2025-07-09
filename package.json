@@ -11,7 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@fiap-pos-front-end/fiap-tc-shared": "^0.2.1",
+    "@fiap-pos-front-end/fiap-tc-shared": "^0.2.2",
     "chart.js": "^4.5.0",
     "mitt": "^3.0.1",
     "react": "^19.1.0",
