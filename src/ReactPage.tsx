@@ -1,18 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import MyChart from "./components/Charts";
-import { SharedService } from "mfeShell/lib-shared";
+import { useEmit } from "./hooks/useEmit";
+import { useEventBus } from "./hooks/useEventBus";
 
 const ReactPage = () => {
-  const [msg, setMsg] = useState<string>("");
-  useEffect(() => {
-    const service = new SharedService();
-    setMsg(service.getHello());
-  }, []);
+  const [balance, setBalance] = useState(0);
+  const emit = useEmit();
+
+  useEventBus<number>("balanceChange", setBalance);
 
   return (
     <div style={{ padding: 20, border: "2px dashed blue" }}>
       <h2>React Path</h2>
-      <p>Evento Shared: {msg}</p>
+      <button onClick={() => emit("balanceChange", balance + 1)}>
+        Incrementar balance ({balance})
+      </button>
+      <div>Balance: {balance}</div>
 
       <MyChart />
     </div>
