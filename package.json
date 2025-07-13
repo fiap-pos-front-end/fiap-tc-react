@@ -8,7 +8,7 @@
     "build": "webpack build --config webpack.config.cjs"
   },
   "dependencies": {
-    "@fiap-pos-front-end/fiap-tc-shared": "^0.2.2",
+    "@fiap-pos-front-end/fiap-tc-shared": "^0.2.5",
     "chart.js": "^4.5.0",
     "mitt": "^3.0.1",
     "react": "^19.1.0",
