@@ -1,25 +1,10 @@
-import { useState } from "react";
-import MyChart from "./components/Charts";
-import { useEmit } from "./hooks/useEmit";
-import { useEventBus } from "./hooks/useEventBus";
+import ChartsPage from "./pages/ChartsPage";
+import { transactions } from "./data/transactions";
 
-const ReactPage = () => {
-  const [balance, setBalance] = useState(0);
-  const emit = useEmit();
-
-  useEventBus<number>("balanceChange", setBalance);
-
+export default function ReactPage() {
   return (
-    <div style={{ padding: 20, border: "2px dashed blue" }}>
-      <h2>React Path</h2>
-      <button onClick={() => emit("balanceChange", balance + 1)}>
-        Incrementar balance ({balance})
-      </button>
-      <div>Balance: {balance}</div>
-
-      <MyChart />
+    <div className="flex flex-col h-full">
+      <ChartsPage transactions={transactions} />
     </div>
   );
-};
-
-export default ReactPage;
+}
