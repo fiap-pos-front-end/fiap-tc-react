@@ -36,31 +36,13 @@ fiap-tc-react/
 ## Scripts disponíveis
 
 ```bash
-npm run dev       # Dev com Vite (http://localhost:5173)
 npm run start     # Dev com Webpack (http://localhost:4300)
 npm run build     # Build de produção via Webpack (output: dist/)
-npm run preview   # Preview do build Vite
-npm run lint      # Lint em todo o código
 ```
 
 ## Como executar
 
-1. Instale dependências:
-   ```bash
-   npm install
-   ```
-2. **Modo Vite**
-   ```bash
-   npm run dev
-   ```
-3. **Modo Webpack + Module Federation**
-   ```bash
-   npm run start
-   ```
-4. **Build para produção**
-   ```bash
-   npm run build
-   ```
+Utilize o `start:all` no projeto fiap-tc-shell.
 
 ## Integração com Shell (Angular)
 
@@ -92,10 +74,3 @@ Utlize conforme necessário:
 ```html
 <app-react-wrapper />
 ```
-
-## Lint
-
-- **ESLint**:
-  ```bash
-  npm run lint
-  ```
