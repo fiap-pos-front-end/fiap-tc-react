@@ -10,7 +10,6 @@ export function useChartData(transactions: Transaction[], month: string) {
       return d.getFullYear() === year && d.getMonth() + 1 === monthNum;
     });
 
-    // PIE
     const totals = filtered.reduce(
       (acc, tx) => {
         acc[tx.type] += tx.value;
@@ -28,7 +27,6 @@ export function useChartData(transactions: Transaction[], month: string) {
       ],
     };
 
-    // BAR
     const byCat = filtered.reduce<Record<string, number>>((acc, tx) => {
       acc[tx.category] = (acc[tx.category] || 0) + tx.value;
       return acc;
@@ -44,7 +42,6 @@ export function useChartData(transactions: Transaction[], month: string) {
       ],
     };
 
-    // LINE
     const daysInMonth = new Date(year, monthNum, 0).getDate();
     const labels = Array.from({ length: daysInMonth }, (_, i) =>
       String(i + 1).padStart(2, "0")

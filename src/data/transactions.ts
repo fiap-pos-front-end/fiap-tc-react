@@ -1,7 +1,7 @@
 export type TransactionType = "Receita" | "Despesa";
 
 export type Transaction = {
-  date: string; // formato "YYYY-MM-DD"
+  date: string;
   type: TransactionType;
   category: string;
   value: number;
