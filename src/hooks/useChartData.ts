@@ -1,10 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
-import { useMemo } from "react";
-import type { Transaction } from "../data/transactions";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-export function useChartData(transactions: Transaction[], month: string) {
+import { useMemo } from "react";
+
+export function useChartData(transactions: any[], month: string) {
   return useMemo(() => {
     const [year, monthNum] = month.split("-").map(Number);
+
     const filtered = transactions.filter((tx) => {
       const d = new Date(tx.date);
       return d.getFullYear() === year && d.getMonth() + 1 === monthNum;
@@ -12,11 +13,15 @@ export function useChartData(transactions: Transaction[], month: string) {
 
     const totals = filtered.reduce(
       (acc, tx) => {
-        acc[tx.type] += tx.value;
+        const key =
+          tx.type.charAt(0).toUpperCase() + tx.type.slice(1).toLowerCase();
+        acc[key as "Receita" | "Despesa"] =
+          (acc[key as "Receita" | "Despesa"] || 0) + tx.amount;
         return acc;
       },
       { Receita: 0, Despesa: 0 }
     );
+
     const pieData = {
       labels: ["Receita", "Despesa"],
       datasets: [
@@ -28,7 +33,8 @@ export function useChartData(transactions: Transaction[], month: string) {
     };
 
     const byCat = filtered.reduce<Record<string, number>>((acc, tx) => {
-      acc[tx.category] = (acc[tx.category] || 0) + tx.value;
+      const name = tx.category.name;
+      acc[name] = (acc[name] || 0) + tx.amount;
       return acc;
     }, {});
     const barData = {
@@ -48,12 +54,16 @@ export function useChartData(transactions: Transaction[], month: string) {
     );
     const revenue = new Array(daysInMonth).fill(0);
     const expense = new Array(daysInMonth).fill(0);
+
     filtered.forEach((tx) => {
-      const day = new Date(tx.date).getDate() - 1;
-      tx.type === "Receita"
-        ? (revenue[day] += tx.value)
-        : (expense[day] += tx.value);
+      const dayIndex = new Date(tx.date).getDate() - 1;
+      if (tx.type === "RECEITA") {
+        revenue[dayIndex] += tx.amount;
+      } else {
+        expense[dayIndex] += tx.amount;
+      }
     });
+
     const lineData = {
       labels,
       datasets: [
