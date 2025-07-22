@@ -33,7 +33,7 @@ export function useChartData(transactions: any[], month: string) {
     };
 
     const byCat = filtered.reduce<Record<string, number>>((acc, tx) => {
-      const name = tx.category.name;
+      const name = tx.category?.name;
       acc[name] = (acc[name] || 0) + tx.amount;
       return acc;
     }, {});

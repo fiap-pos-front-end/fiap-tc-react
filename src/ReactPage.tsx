@@ -13,7 +13,7 @@ export default function ReactPage() {
     onEvent(EVENTS.TRANSACTIONS_UPDATED, (newTxs) => {
       setTransactionsState(newTxs);
     });
-  }, []);
+  }, [transactions]);
 
   return (
     <div className="flex flex-col h-full">
