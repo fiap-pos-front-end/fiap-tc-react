@@ -14,6 +14,7 @@ app.use(cors());
 
 app.use(express.static(clientDist));
 
+// TODO: tentar pegar a rota do shell e mostrar o sobre nos
 app.use((req, res) => {
   const appHtml = renderToString(React.createElement(NotFoundPage));
   const template = fs.readFileSync(path.join(clientDist, "index.html"), "utf8");
