@@ -21,7 +21,7 @@ export default function MonthPicker({ month, onChange }: Props) {
   return (
     <div className="mb-2 flex flex-col">
       <label htmlFor="month" className="mb-1 font-medium">
-        Selecione mês
+        Selecione o mês
       </label>
       <Flatpickr
         id="month"
