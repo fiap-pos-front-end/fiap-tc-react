@@ -20,7 +20,11 @@ export default function AboutUs() {
   return (
     <section className="px-2 max-w-7xl mx-auto">
       <h1 className="ml-2 text-2xl">Sobre Nós</h1>
-      <p className="mb-4 ml-2 text-gray-500 text-md">Desenvolvedores.</p>
+      <p className="mb-4 ml-2 text-gray-500 text-md">
+        Somos um time de desenvolvedores front-end apaixonados por tecnologia e
+        inovação. Atualmente, estamos em fase de pós-graduação com foco no
+        front-end.
+      </p>
 
       <div className="flex flex-wrap justify-center gap-6">
         {team.map((member) => (
