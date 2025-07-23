@@ -1,54 +1,52 @@
 const team = [
   {
-    name: "Alice Souza",
-    role: "CEO",
-    photo: "https://via.placeholder.com/150",
-    bio: "Apaixonada por tecnologia e liderança.",
+    name: "João Cardoso",
+    photo: "https://avatars.githubusercontent.com/u/209392975",
+    role: "@Jao-Cardoso",
   },
   {
-    name: "Bruno Lima",
-    role: "CTO",
-    photo: "https://via.placeholder.com/150",
-    bio: "Especialista em frontend e arquitetura de microfrontends.",
+    name: "João Veronese",
+    photo: "https://avatars3.githubusercontent.com/u/28982977",
+    role: "@joaodos3v",
   },
   {
-    name: "Carla Dias",
-    role: "Design Lead",
-    photo: "https://via.placeholder.com/150",
-    bio: "Cria experiências incríveis com UI/UX.",
+    name: "Leonardo Henrique",
+    photo: "https://avatars.githubusercontent.com/u/134629428",
+    role: "@leonardognh",
   },
 ];
 
 export default function AboutUs() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-4">Sobre Nós</h1>
-      <p className="text-lg mb-8">
-        Somos um time nerd, metódico e fora da caixinha, focado em criar
-        soluções front‑end de alta qualidade.
-      </p>
+    <section className="px-2 max-w-7xl mx-auto">
+      <h1 className="ml-2 text-2xl">Sobre Nós</h1>
+      <p className="mb-4 ml-2 text-gray-500 text-md">Desenvolvedores.</p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div className="flex flex-wrap justify-center gap-6">
         {team.map((member) => (
           <div
             key={member.name}
-            className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow"
+            className="
+              w-full         /* 1 col (mobile) */
+              sm:w-1/2       /* 2 cols (>=640px) */
+              md:w-1/3       /* 3 cols (>=768px) */
+              flex flex-col items-center
+              bg-white p-6 rounded-xl
+              border-1
+            "
           >
             <img
               src={member.photo}
               alt={member.name}
-              className="w-32 h-32 rounded-full mx-auto mb-4"
+              className="w-32 h-32 rounded-full mb-4"
             />
-            <h2 className="text-2xl font-semibold text-center">
-              {member.name}
-            </h2>
-            <p className="text-sm text-center text-gray-600 mb-4">
-              {member.role}
+            <h2 className="text-xl font-semibold mb-1">{member.name}</h2>
+            <p className="flex justify-center items-center text-sm text-gray-600">
+              <i className="pi pi-github mr-1"></i> {member.role}
             </p>
-            <p className="text-gray-700 text-sm">{member.bio}</p>
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 }
