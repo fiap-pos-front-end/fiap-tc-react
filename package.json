@@ -9,7 +9,7 @@
     "start": "npm run build && npm run build:server && node dist-server/server.cjs"
   },
   "dependencies": {
-    "@fiap-pos-front-end/fiap-tc-shared": "^0.2.11",
+    "@fiap-pos-front-end/fiap-tc-shared": "^0.2.22",
     "chart.js": "^4.5.0",
     "cors": "^2.8.5",
     "css-loader": "^7.1.2",

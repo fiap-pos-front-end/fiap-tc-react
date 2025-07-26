@@ -57,7 +57,7 @@ export function useChartData(transactions: any[], month: string) {
 
     filtered.forEach((tx) => {
       const dayIndex = new Date(tx.date).getDate() - 1;
-      if (tx.type === "RECEITA") {
+      if (tx.type === "Receita") {
         revenue[dayIndex] += tx.amount;
       } else {
         expense[dayIndex] += tx.amount;
