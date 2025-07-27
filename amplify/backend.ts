@@ -1,13 +1,23 @@
 import { defineBackend } from "@aws-amplify/backend";
-import { auth } from "./auth/resource";
-import { data } from "./data/resource";
-import { myFirstFunction } from "./my-first-function/resource";
+import { lambda, staticSite } from "@aws-amplify/backend";
 
-/**
- * @see https://docs.amplify.aws/react/build-a-backend/ to add storage, functions, and more
- */
+const ssr = lambda({
+  name: "ssr",
+  entry: "./amplify/functions/ssr/index.ts",
+  runtime: "nodejs18.x",
+});
+
 defineBackend({
-  auth,
-  data,
-  myFirstFunction,
+  ssr,
+  hosting: staticSite({
+    path: "./dist",
+    buildCommands: ["npm install", "npm run build"],
+    errorPage: "index.html",
+    rewrites: [
+      {
+        source: "/sobre-nos",
+        destination: ssr.url,
+      },
+    ],
+  }),
 });

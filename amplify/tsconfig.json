@@ -8,10 +8,10 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
+    "jsx": "react",
     "paths": {
-      "$amplify/*": [
-        "../.amplify/generated/*"
-      ]
+      "$amplify/*": ["../.amplify/generated/*"]
     }
-  }
+  },
+  "include": ["functions", "ssr"]
 }
