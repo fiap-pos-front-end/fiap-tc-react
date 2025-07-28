@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Chart as ChartJS,
   ArcElement,
@@ -11,7 +10,11 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Transaction } from "@fiap-pos-front-end/fiap-tc-shared";
+import {
+  EVENTS,
+  onEvent,
+  Transaction,
+} from "@fiap-pos-front-end/fiap-tc-shared";
 import { useChartData } from "../hooks/useChartData";
 import MonthPicker from "./MonthPicker";
 import PieChart from "./PieChart";
@@ -35,9 +38,9 @@ export default function Charts() {
   const [transactions, setTransactionsState] = useState<Transaction[]>([]);
 
   useEffect(() => {
-    // onEvent(EVENTS.TRANSACTIONS_UPDATED, (newTxs) => {
-    //   setTransactionsState(newTxs);
-    // });
+    onEvent(EVENTS.TRANSACTIONS_UPDATED, (newTxs) => {
+      setTransactionsState(newTxs);
+    });
   }, [transactions]);
 
   const [month, setMonth] = useState(() => {
