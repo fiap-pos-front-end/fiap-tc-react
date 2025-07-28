@@ -1,76 +1,40 @@
-# Fiap Tech Challenge React
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-**Microfrontend React Remote** para o Shell de Microfrontends do FIAP Tech Challenge.
+## Getting Started
 
----
-
-## Tecnologias
-
-- **React** 19.x
-- **TypeScript** 5.x
-- **Webpack** 5 + Module Federation
-- **Vite** 4.x (plugin-react)
-- **Chart.js** + **react-chartjs-2**
-- **mitt** (Event Bus)
-- **ESLint** (configuração customizada)
-
-## Estrutura de Pastas
-
-```
-fiap-tc-react/
-├─ public/            # Assets estáticos
-├─ src/
-│  ├─ assets/         # Logos e imagens
-│  ├─ components/     # Gráficos
-│  ├─ hooks/          # Hooks customizados
-│  ├─ pages/          # Páginas
-│  ├─ bootstrap.tsx   # Ponto de entrada federado
-│  ├─ main.tsx        # Inicialização standalone
-│  └─ index.css       # Estilos globais
-├─ index.html         # Template Webpack
-├─ vite.config.ts     # Configuração Vite
-├─ webpack.config.cjs # Configuração Webpack Dev + Federation
-└─ package.json       # Scripts e dependências
-```
-
-## Scripts disponíveis
+First, run the development server:
 
 ```bash
-npm run start     # Dev com Webpack (http://localhost:4300)
-npm run build     # Build de produção via Webpack (output: dist/)
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-## Como executar
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Utilize o `start:all` no projeto fiap-tc-shell.
+You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-## Integração com Shell (Angular)
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
-No shell Angular, adicione no crie um component `ReactWrapperComponent`:
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-```ts
-import { Component } from "@angular/core";
-import { loadRemoteModule } from "@angular-architects/module-federation";
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-@Component({
-  selector: "app-react-wrapper",
-  template: '<div id="react-container"></div>',
-})
-export class ReactWrapperComponent {
-  async ngAfterViewInit() {
-    const remoteModule = await loadRemoteModule({
-      type: "module",
-      remoteEntry: URL_MFE_REACT,
-      exposedModule: "./mount",
-    });
+## Learn More
 
-    remoteModule.mount("react-container");
-  }
-}
-```
+To learn more about Next.js, take a look at the following resources:
 
-Utlize conforme necessário:
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-```html
-<app-react-wrapper />
-```
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

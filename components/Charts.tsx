@@ -13,11 +13,11 @@ import {
 } from "chart.js";
 import { Transaction } from "@fiap-pos-front-end/fiap-tc-shared";
 import { useChartData } from "../hooks/useChartData";
-import MonthPicker from "../components/MonthPicker";
-import PieChart from "../components/PieChart";
-import BarChart from "../components/BarChart";
-import LineChart from "../components/LineChart";
-import { useState } from "react";
+import MonthPicker from "./MonthPicker";
+import PieChart from "./PieChart";
+import BarChart from "./BarChart";
+import LineChart from "./LineChart";
+import { useEffect, useState } from "react";
 
 ChartJS.register(
   ArcElement,
@@ -31,11 +31,15 @@ ChartJS.register(
   Legend
 );
 
-type Props = {
-  transactions: Transaction[];
-};
+export default function Charts() {
+  const [transactions, setTransactionsState] = useState<Transaction[]>([]);
 
-export default function ChartsPage({ transactions }: Props) {
+  useEffect(() => {
+    // onEvent(EVENTS.TRANSACTIONS_UPDATED, (newTxs) => {
+    //   setTransactionsState(newTxs);
+    // });
+  }, [transactions]);
+
   const [month, setMonth] = useState(() => {
     const d = new Date();
     return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
@@ -53,10 +57,12 @@ export default function ChartsPage({ transactions }: Props) {
 
   if (isPieEmpty || isBarEmpty || isLineEmpty) {
     return (
-      <div className="w-full space-y-6">
-        <MonthPicker month={month} onChange={setMonth} />
-        <div className="w-full py-8 text-center text-gray-500">
-          Não há dados disponíveis para o mês selecionado...
+      <div className="flex flex-col h-full">
+        <div className="w-full space-y-6">
+          <MonthPicker month={month} onChange={setMonth} />
+          <div className="w-full py-8 text-center text-gray-500">
+            Não há dados disponíveis para o mês selecionado...
+          </div>
         </div>
       </div>
     );
@@ -69,19 +75,21 @@ export default function ChartsPage({ transactions }: Props) {
   };
 
   return (
-    <div className="w-full space-y-6">
-      <MonthPicker month={month} onChange={setMonth} />
+    <div className="flex flex-col h-full">
+      <div className="w-full space-y-6">
+        <MonthPicker month={month} onChange={setMonth} />
 
-      <div className="h-64">
-        <PieChart data={pieData} options={options} />
-      </div>
+        <div className="h-64">
+          <PieChart data={pieData} options={options} />
+        </div>
 
-      <div className="h-64">
-        <BarChart data={barData} options={options} />
-      </div>
+        <div className="h-64">
+          <BarChart data={barData} options={options} />
+        </div>
 
-      <div className="h-64">
-        <LineChart data={lineData} options={options} month={month} />
+        <div className="h-64">
+          <LineChart data={lineData} options={options} month={month} />
+        </div>
       </div>
     </div>
   );

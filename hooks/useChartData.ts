@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { useMemo } from "react";
 
 export function useChartData(transactions: any[], month: string) {
