@@ -1,9 +1,6 @@
 import { Portuguese } from "flatpickr/dist/l10n/pt.js";
 import Flatpickr from "react-flatpickr";
 import monthSelectPlugin from "flatpickr/dist/plugins/monthSelect";
-import "flatpickr/dist/themes/airbnb.css";
-import "flatpickr/dist/plugins/monthSelect/style.css";
-import "flatpickr/dist/flatpickr.css";
 
 import { useMemo } from "react";
 
