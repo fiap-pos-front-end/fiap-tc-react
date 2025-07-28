@@ -1,3 +1,4 @@
-import HomePage from "@/components/Home";
+import dynamic from "next/dynamic";
 
-export default HomePage;
+const Home = dynamic(() => import("../components/Home"), { ssr: false });
+export default Home;
