@@ -53,7 +53,7 @@ export default function Charts() {
   const isPieEmpty = pieData.datasets[0].data.every((v: number) => v === 0);
   const isBarEmpty =
     barData.labels.length === 0 ||
-    barData.datasets[0].data.every((v: number) => v === 0);
+    barData.datasets.every((ds) => ds.data.every((v: number) => v === 0));
   const isLineEmpty = lineData.datasets.every((ds: any) =>
     ds.data.every((v: number) => v === 0)
   );
@@ -71,11 +71,23 @@ export default function Charts() {
     );
   }
 
-  const options: any = {
+  const pieOptions = {
     responsive: true,
     maintainAspectRatio: false,
-    plugins: { legend: { position: "bottom" } },
+    plugins: {
+      legend: { position: "bottom" },
+    },
   };
+
+  const barOptions = {
+    ...pieOptions,
+    scales: {
+      x: { stacked: true },
+      y: { stacked: true },
+    },
+  };
+
+  const lineOptions = pieOptions;
 
   return (
     <div className="flex flex-col h-full">
@@ -83,15 +95,15 @@ export default function Charts() {
         <MonthPicker month={month} onChange={setMonth} />
 
         <div className="h-64">
-          <PieChart data={pieData} options={options} />
+          <PieChart data={pieData} options={pieOptions} />
         </div>
 
         <div className="h-64">
-          <BarChart data={barData} options={options} />
+          <BarChart data={barData} options={barOptions} />
         </div>
 
         <div className="h-64">
-          <LineChart data={lineData} options={options} month={month} />
+          <LineChart data={lineData} options={lineOptions} month={month} />
         </div>
       </div>
     </div>

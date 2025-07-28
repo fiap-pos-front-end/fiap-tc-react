@@ -30,18 +30,37 @@ export function useChartData(transactions: any[], month: string) {
       ],
     };
 
-    const byCat = filtered.reduce<Record<string, number>>((acc, tx) => {
-      const name = tx.category?.name;
-      acc[name] = (acc[name] || 0) + tx.amount;
-      return acc;
-    }, {});
+    const categoryMap = new Map<string, { Receita: number; Despesa: number }>();
+
+    filtered.forEach((tx) => {
+      const name = tx.category?.name || "Sem categoria";
+      const entry = categoryMap.get(name) || { Receita: 0, Despesa: 0 };
+      entry[tx.type as "Receita" | "Despesa"] += tx.amount;
+      categoryMap.set(name, entry);
+    });
+
+    const categoryLabels = Array.from(categoryMap.keys());
+    const receitaData = categoryLabels.map(
+      (cat) => categoryMap.get(cat)?.Receita ?? 0
+    );
+    const despesaData = categoryLabels.map(
+      (cat) => categoryMap.get(cat)?.Despesa ?? 0
+    );
+
     const barData = {
-      labels: Object.keys(byCat),
+      labels: categoryLabels,
       datasets: [
         {
-          label: "R$",
-          data: Object.values(byCat),
-          backgroundColor: "#38bdf8",
+          label: "Receita",
+          data: receitaData,
+          backgroundColor: "#4ade80",
+          stack: "total",
+        },
+        {
+          label: "Despesa",
+          data: despesaData,
+          backgroundColor: "#f87171",
+          stack: "total",
         },
       ],
     };
