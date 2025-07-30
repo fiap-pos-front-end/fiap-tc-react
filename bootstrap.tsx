@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { MemoryRouter } from "react-router-dom";
-import AboutUs from "./pages/about-us";
+import AboutUs from "./components/AboutUs";
 import HomePage from "./components/Home";
 
 const routesMap: Record<string, React.ReactNode> = {
