@@ -1,22 +1,18 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { MemoryRouter } from "react-router-dom";
-import AboutUs from "./components/AboutUs";
-import HomePage from "./components/Home";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { MemoryRouter } from 'react-router-dom';
+import AboutUs from './pages/about-us';
+import HomePage from './pages/home';
 
 const routesMap: Record<string, React.ReactNode> = {
-  "/": <HomePage />,
-  "/about-us": <AboutUs />,
+  '/': <HomePage />,
+  '/about-us': <AboutUs />,
 };
 
-export function mount(containerId: string, route: string = "/") {
+export function mount(containerId: string, route: string = '/') {
   const container = document.getElementById(containerId);
   if (!container) return;
 
   const root = ReactDOM.createRoot(container);
-  root.render(
-    <MemoryRouter initialEntries={[route]}>
-      {routesMap[route] ?? <div>404</div>}
-    </MemoryRouter>
-  );
+  root.render(<MemoryRouter initialEntries={[route]}>{routesMap[route] ?? <div>404</div>}</MemoryRouter>);
 }
