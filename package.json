@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@fiap-pos-front-end/fiap-tc-shared": "^0.2.22",
+    "@fiap-pos-front-end/fiap-tc-shared": "^0.2.25",
     "@module-federation/nextjs-mf": "8.7.8",
     "chart.js": "^4.5.0",
     "mitt": "^3.0.1",
