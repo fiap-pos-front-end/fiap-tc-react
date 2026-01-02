@@ -18,8 +18,9 @@ export class TransactionAggregator {
   calculateTotals(transactions: Transaction[]) {
     return transactions.reduce(
       (acc, tx) => {
-        acc.receita += tx.isReceita() ? tx.amount : 0;
-        acc.despesa += tx.isDespesa() ? tx.amount : 0;
+        const amount = parseFloat(tx.amount);
+        acc.receita += tx.isReceita() ? amount : 0;
+        acc.despesa += tx.isDespesa() ? amount : 0;
         return acc;
       },
       { receita: 0, despesa: 0 }
@@ -36,10 +37,12 @@ export class TransactionAggregator {
       const name = tx.categoryName || 'Sem categoria';
       const entry = categoryMap.get(name) || { receita: 0, despesa: 0 };
 
+      const amount = parseFloat(tx.amount) || 0;
+
       if (tx.isReceita()) {
-        entry.receita += tx.amount;
+        entry.receita += amount;
       } else {
-        entry.despesa += tx.amount;
+        entry.despesa += amount;
       }
 
       categoryMap.set(name, entry);
@@ -51,6 +54,7 @@ export class TransactionAggregator {
     }));
   }
 
+
   /**
    * Aggregate by day
    */
@@ -60,14 +64,17 @@ export class TransactionAggregator {
     transactions.forEach((tx) => {
       const dayIndex = tx.date.getDate() - 1;
       if (dayIndex >= 0 && dayIndex < daysInMonth) {
+        const amount = parseFloat(tx.amount) || 0; // converte string para número
+
         if (tx.isReceita()) {
-          dailyData[dayIndex].receita += tx.amount;
+          dailyData[dayIndex].receita += amount;
         } else {
-          dailyData[dayIndex].despesa += tx.amount;
+          dailyData[dayIndex].despesa += amount;
         }
       }
     });
 
     return dailyData;
   }
+
 }

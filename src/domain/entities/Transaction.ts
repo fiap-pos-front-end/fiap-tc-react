@@ -1,7 +1,7 @@
 export class Transaction {
   constructor(
     public readonly id: number,
-    public readonly amount: number,
+    public readonly amount: string,
     public readonly type: 'Receita' | 'Despesa',
     public readonly date: Date,
     public readonly categoryId: number,
